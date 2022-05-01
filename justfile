@@ -5,7 +5,7 @@ lint:
   #!/usr/bin/env bash
   autoflake -ir --exclude=.venv --remove-all-unused-imports .
   isort .
-  black .
+  black -q .
 
 lint-d:
   DOCKER_BUILDKIT=1 docker build -f=docker/Dockerfile -t=docker-template --target=lint .
