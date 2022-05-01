@@ -1,7 +1,14 @@
+# syntax=docker/dockerfile:1
+
+# https://bit.ly/374AGW9 - Lighten your Python image with Docker multi-stage builds
+# https://bit.ly/39upBi5 - Fast Docker Builds With Caching (Not Only) For Python
+# https://bit.ly/3FcBF3m - Poetry managed Python FastAPI application with Docker multi-stage builds
+
 # Dockerfile
 # Uses multi-stage builds requiring Docker 17.05 or higher
 # See https://docs.docker.com/develop/develop-images/multistage-build/
 
+#### python-base ##############################################################
 # Creating a python base with shared environment variables
 FROM python:3.10.4-slim as python-base
 ENV PYTHONUNBUFFERED=1 \
@@ -14,10 +21,9 @@ ENV PYTHONUNBUFFERED=1 \
   POETRY_NO_INTERACTION=1 \
   PYSETUP_PATH="/opt/pysetup" \
   VENV_PATH="/opt/pysetup/.venv"
-
 ENV PATH="$POETRY_HOME/bin:$VENV_PATH/bin:$PATH"
 
-
+#### builder-base #############################################################
 # builder-base is used to build dependencies
 FROM python-base as builder-base
 RUN apt-get update \
@@ -35,7 +41,7 @@ WORKDIR $PYSETUP_PATH
 COPY ./poetry.lock ./pyproject.toml ./
 RUN poetry install --no-dev  # respects
 
-
+#### development ##############################################################
 # 'development' stage installs all dev deps and can be used to develop code.
 # For example using docker-compose to mount local volume under /app
 FROM python-base as development
@@ -60,22 +66,22 @@ EXPOSE 8000
 ENTRYPOINT /docker-entrypoint.sh $0 $@
 CMD ["uvicorn", "--reload", "--host=0.0.0.0", "--port=8000", "main:app"]
 
-
+#### lint #####################################################################
 # 'lint' stage runs black and isort
 # running in check mode means build will fail if any linting errors occur
 FROM development AS lint
-RUN black --check app tests
+RUN black --check -q app tests
 RUN isort --check app tests
 CMD ["tail", "-f", "/dev/null"]
 
-
+#### test #####################################################################
 # 'test' stage runs our unit tests with pytest and
 # coverage.  Build will fail if test coverage is under 95%
 FROM development AS test
 RUN coverage run --rcfile ./pyproject.toml -m pytest ./tests
 RUN coverage report --fail-under 95
 
-
+#### production ###############################################################
 # 'production' stage uses the clean 'python-base' stage and copyies
 # in only our runtime deps that were installed in the 'builder-base'
 FROM python-base as production
@@ -91,4 +97,4 @@ COPY ./app /app
 WORKDIR /app
 
 ENTRYPOINT /docker-entrypoint.sh $0 $@
-CMD [ "gunicorn", "--worker-class uvicorn.workers.UvicornWorker", "--config /gunicorn_conf.py", "main:app"]
+CMD ["gunicorn", "--worker-class uvicorn.workers.UvicornWorker", "--config /gunicorn_conf.py", "main:app"]
