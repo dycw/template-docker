@@ -1,10 +1,10 @@
-import pytest
-from starlette.testclient import TestClient
+from fastapi.testclient import TestClient
+from pytest import fixture
 
 from app.main import app
 
 
-@pytest.fixture(scope="function")
+@fixture(scope="function")
 def testclient():
 
     with TestClient(app) as client:
