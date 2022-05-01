@@ -31,6 +31,17 @@ line-length = 80
 skip-magic-trailing-comma = true
 target-version = ['py310']
 
+#### coverage #################################################################
+[tool.coverage]
+
+[tool.coverage.run]
+source = ["app"]
+branch = true
+omit = ['']
+
+[tool.coverage.report]
+exclude_lines = ["# noqa", "raise NotImplementedError"]
+
 #### isort ####################################################################
 [tool.isort]
 atomic = true
@@ -43,13 +54,23 @@ profile = "black"
 remove_redundant_aliases = true
 virtual_env = ".venv/bin/python"
 
-[tool.coverage]
-
-# https://github.com/nedbat/coveragepy
-[tool.coverage.run]
-source = ["app"]
-branch = true
-omit = ['']
-
-[tool.coverage.report]
-exclude_lines = ["# noqa", "raise NotImplementedError"]
+#### pyright ##################################################################
+[tool.pyright]
+include = ["."]
+venvPath = ".venv/bin/venv"
+pythonVersion = "3.10"
+pythonPlatform = "Linux"
+executionEnvironments = [{ root = "src" }, { root = "tests" }]
+typeCheckingMode = "strict"
+reportMissingTypeArgument = false
+reportMissingTypeStubs = false
+reportUnknownParameterType = false
+reportUnknownArgumentType = false
+reportUnknownVariableType = false
+reportUnknownMemberType = false
+reportUntypedBaseClass = false
+reportImplicitStringConcatenation = "error"
+reportMissingSuperCall = "error"
+reportPropertyTypeMismatch = "error"
+reportUnnecessaryTypeIgnoreComment = "error"
+reportUnusedCallResult = "error"
