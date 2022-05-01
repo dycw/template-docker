@@ -9,7 +9,6 @@
 .idea
 .jekyll-metadata
 .sass-cache
-tests
 _site
 CONTRIBUTING.md
 Dockerfile
