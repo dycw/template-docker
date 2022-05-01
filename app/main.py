@@ -1,8 +1,3 @@
-"""
-Minimal FastAPI application taken directly from the tutorial.
-https://fastapi.tiangolo.com/
-"""
-
 from fastapi import FastAPI
 from pydantic import BaseModel
 
