@@ -1,3 +1,9 @@
+# syntax=docker/dockerfile:1
+
+# https://bit.ly/374AGW9 - Lighten your Python image with Docker multi-stage builds
+# https://bit.ly/39upBi5 - Fast Docker Builds With Caching (Not Only) For Python
+# https://bit.ly/3FcBF3m - Poetry managed Python FastAPI application with Docker multi-stage builds
+
 # Dockerfile
 # Uses multi-stage builds requiring Docker 17.05 or higher
 # See https://docs.docker.com/develop/develop-images/multistage-build/
