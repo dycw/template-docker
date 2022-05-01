@@ -56,11 +56,8 @@ virtual_env = ".venv/bin/python"
 
 #### pyright ##################################################################
 [tool.pyright]
-include = ["."]
-venvPath = ".venv/bin/venv"
-pythonVersion = "3.10"
-pythonPlatform = "Linux"
-executionEnvironments = [{ root = "src" }, { root = "tests" }]
+include = ["app", "tests"]
+executionEnvironments = [{ root = "app" }]
 typeCheckingMode = "strict"
 reportMissingTypeArgument = false
 reportMissingTypeStubs = false
