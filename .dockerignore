@@ -1,7 +1,12 @@
+
+.git
+.github
+.dockerignore
+.gitignore
+
 .idea
 .vscode
 
-# Python
 __pycache__/
 *.py[cod]
 *$py.class
@@ -17,3 +22,6 @@ venv
 .AppleDouble
 .LSOverride
 ._*
+
+.vscode
+.idea
