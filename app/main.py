@@ -6,6 +6,7 @@ https://fastapi.tiangolo.com/
 from fastapi import FastAPI
 from pydantic import BaseModel
 
+
 app = FastAPI()
 
 
