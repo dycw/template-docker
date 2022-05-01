@@ -6,23 +6,22 @@ build-backend = "poetry.masonry.api"
 name = "backend"
 version = "0.1.0"
 description = "Minimal Poetry example with Docker Multi-Stage builds"
-authors = ["Michael Oliver <mo175@live.com>"]
+authors = ["Derek Wan <d.wan@icloud.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.7"
-
-fastapi = "0.52.0"
+python = "^3.10"
+fastapi = "0.75.2"
 gunicorn = "^20.0.4"
-uvicorn = "^0.11.3"
-
+uvicorn = "^0.17.6"
 
 [tool.poetry.dev-dependencies]
-pytest = "5.3.5"
-coverage = { version = "5.0.3", extras = ["toml"]}
-black = "^19.10b0"
-isort = { version = "^4.3.21", extras = ["pyproject"]}
+black = "^22.3.0"
+coverage = "^6.3.2"
+isort = "^5.10.1"
+poetry-deps-scanner = "^1.0.1"
+pre-commit = "^2.18.1"
+pytest = "^7.1.2"
 requests = "^2.23.0"
-
 
 [tool.black]
 # https://github.com/psf/black
@@ -50,17 +49,13 @@ multi_line_output = 3
 include_trailing_comma = true
 force_grid_wrap = 0
 
-
 [tool.coverage]
+
 # https://github.com/nedbat/coveragepy
-    [tool.coverage.run]
+[tool.coverage.run]
+source = ["app"]
+branch = true
+omit = ['']
 
-    source = ["app"]
-    branch = true
-    omit = ['']
-
-    [tool.coverage.report]
-    exclude_lines = [
-        "# noqa",
-        "raise NotImplementedError"
-    ]
+[tool.coverage.report]
+exclude_lines = ["# noqa", "raise NotImplementedError"]
