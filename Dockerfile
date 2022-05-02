@@ -52,8 +52,8 @@ COPY --from=builder-base $POETRY_HOME $POETRY_HOME
 COPY --from=builder-base $PYSETUP_PATH $PYSETUP_PATH
 
 # Copying in our entrypoint
-COPY ./docker/docker-entrypoint.sh /docker-entrypoint.sh
-RUN chmod +x /docker-entrypoint.sh
+COPY ./entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
 # venv already has runtime deps installed we get a quicker install
 WORKDIR $PYSETUP_PATH
@@ -63,7 +63,7 @@ WORKDIR /app
 COPY . .
 
 EXPOSE 8000
-ENTRYPOINT /docker-entrypoint.sh $0 $@
+ENTRYPOINT /entrypoint.sh $0 $@
 CMD ["uvicorn", "--reload", "--host=0.0.0.0", "--port=8000", "main:app"]
 
 #### lint #####################################################################
@@ -90,11 +90,12 @@ ENV FASTAPI_ENV=production
 COPY --from=builder-base $VENV_PATH $VENV_PATH
 COPY ./docker/gunicorn_conf.py /gunicorn_conf.py
 
-COPY ./docker/docker-entrypoint.sh /docker-entrypoint.sh
-RUN chmod +x /docker-entrypoint.sh
+COPY ./entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
 COPY ./app /app
 WORKDIR /app
 
-ENTRYPOINT /docker-entrypoint.sh $0 $@
-CMD ["gunicorn", "--worker-class uvicorn.workers.UvicornWorker", "--config /gunicorn_conf.py", "main:app"]
+ENTRYPOINT /entrypoint.sh $0 $@
+CMD ["gunicorn", "--worker-class uvicorn.workers.UvicornWorker", \
+  "--config /gunicorn_conf.py", "main:app"]
