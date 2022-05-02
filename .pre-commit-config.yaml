@@ -94,3 +94,8 @@ repos:
     rev: 5.10.1
     hooks:
       - id: isort
+  # others
+  - repo: https://github.com/dycw/pre-commit-hooks
+    rev: master
+    hooks:
+      - id: run-scan-deps
