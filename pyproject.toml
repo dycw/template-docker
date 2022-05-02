@@ -89,7 +89,7 @@ reportUnusedCallResult = "error"
 [tool.pytest.ini_options]
 addopts = ["-rsxX", "--color=auto", "--strict-markers"]
 filterwarnings = ["error", "ignore::DeprecationWarning"]
-looponfailroots = ["app", 'test']
+looponfailroots = ["app", "tests"]
 minversion = "7.0"
 testpaths = "tests"
 xfail_strict = true
