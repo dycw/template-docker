@@ -55,19 +55,6 @@ omit = ['']
 [tool.coverage.report]
 exclude_lines = ["# noqa", "raise NotImplementedError"]
 
-#### flakeheaven ##############################################################
-[tool.flakeheaven]
-exclude = [".venv"]
-format = "grouped"
-max_line_length = 80
-show_source = true
-
-[tool.flakeheaven.plugins]
-"flake8-*" = ["+*"]
-
-[tool.flakeheaven.exceptions."tests/"]
-flake8-bandit = ["-S101"] # assert used
-
 #### isort ####################################################################
 [tool.isort]
 atomic = true
