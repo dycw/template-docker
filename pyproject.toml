@@ -19,10 +19,23 @@ uvicorn = "^0.17.6"
 autoflake = "^1.4"
 black = "^22.3.0"
 coverage = "^6.3.2"
+flake8-absolute-import = "^1.0.0.1"
+flake8-annotations = "^2.9.0"
+flake8-bandit = "^3.0.0"
+flake8-bugbear = "^22.4.25"
+flake8-comprehensions = "^3.8.0"
+flake8-debugger = "^4.0.0"
+flake8-eradicate = "^1.2.1"
+flake8-no-pep420 = "^2.2.0"
+flake8-pie = "^0.15.0"
+flake8-print = "^5.0.0"
+flake8-simplify = "^0.19.2"
+flake8-unused-arguments = "^0.0.10"
 isort = "^5.10.1"
 poetry-deps-scanner = "^1.0.1"
 pre-commit = "^2.18.1"
 pytest = "^7.1.2"
+pytest-xdist = "^2.5.0"
 requests = "^2.23.0"
 
 #### black ####################################################################
@@ -56,11 +69,8 @@ virtual_env = ".venv/bin/python"
 
 #### pyright ##################################################################
 [tool.pyright]
-include = ["."]
-venvPath = ".venv/bin/venv"
-pythonVersion = "3.10"
-pythonPlatform = "Linux"
-executionEnvironments = [{ root = "src" }, { root = "tests" }]
+include = ["app", "tests"]
+executionEnvironments = [{ root = "app" }]
 typeCheckingMode = "strict"
 reportMissingTypeArgument = false
 reportMissingTypeStubs = false
@@ -74,3 +84,12 @@ reportMissingSuperCall = "error"
 reportPropertyTypeMismatch = "error"
 reportUnnecessaryTypeIgnoreComment = "error"
 reportUnusedCallResult = "error"
+
+#### pytest ###################################################################
+[tool.pytest.ini_options]
+addopts = ["-rsxX", "--color=auto", "--strict-markers"]
+filterwarnings = ["error", "ignore::DeprecationWarning"]
+looponfailroots = "src"
+minversion = "7.0"
+testpaths = "tests"
+xfail_strict = true
