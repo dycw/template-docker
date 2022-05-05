@@ -64,15 +64,15 @@ authors = ["Derek Wan <d.wan@icloud.com>"]
 [tool.poetry.dependencies]
 python = "^3.10"
 alembic = { version = "^1.7.7", extras = ["tz"] }
-fastapi = "0.75.2"
+beartype = "^0.10.4"
+exceptiongroup = "^1.0.0-rc.5"
+fastapi = "0.76.0"
 gunicorn = "^20.0.4"
+loguru = "^0.6.0"
 pydantic = { version = "^1.9.0", extras = ["email"] }
 sqlalchemy = "^1.4.36"
-uvicorn = { version = "^0.17.6", extras = ["standard"] }
 typed-settings = "^1.0.1"
-exceptiongroup = "^1.0.0-rc.5"
-beartype = "^0.10.4"
-loguru = "^0.6.0"
+uvicorn = { version = "^0.17.6", extras = ["standard"] }
 
 [tool.poetry.dev-dependencies]
 autoflake = "^1.4"
