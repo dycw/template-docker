@@ -7,6 +7,12 @@ alembic-up:
 build:
   DOCKER_BUILDKIT=1 docker build -t=docker-template --target=production .
 
+build-run:
+  just build && just run
+
+coverage:
+  open .coverage/html/index.html
+
 lint:
   DOCKER_BUILDKIT=1 docker build -t=docker-template --target=lint .
 

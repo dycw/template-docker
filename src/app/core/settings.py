@@ -16,6 +16,7 @@ _ENV = load(_EnvSettings, "app", config_files=["pyproject.toml"]).ENV
 class Settings:
     DB_URL: str
     DEBUG: bool
+    LOGGING_BACKTRACE: bool
     LOGGING_LEVEL: Literal["DEBUG", "INFO", "WARNING", "ERROR"]
     TITLE: str
 

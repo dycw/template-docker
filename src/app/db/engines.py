@@ -5,15 +5,17 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 from sqlalchemy.orm import sessionmaker
 
+from app.core.settings import SETTINGS
 
-SQLITE_ENGINE = create_engine("sqlite:///./db.sqlite")
+
+SQLITE_ENGINE = create_engine(SETTINGS.DB_URL)
 SessionLocal = sessionmaker(
     bind=SQLITE_ENGINE, autoflush=False, autocommit=False
 )
 
 
 @beartype
-def yield_sess() -> Iterator[Session]:
+def yield_sess() -> Iterator[Session]:  # pragma: no cover
     db = SessionLocal()
     try:
         yield db

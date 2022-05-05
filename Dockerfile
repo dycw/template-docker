@@ -70,16 +70,15 @@ CMD ["uvicorn", "--reload", "--host=0.0.0.0", "--port=8000", "main:app"]
 # 'lint' stage runs black and isort
 # running in check mode means build will fail if any linting errors occur
 FROM development AS lint
-RUN black --check -q app tests
-RUN isort --check app tests
+RUN black --check --exclude=src/app/db/migrations -q src
+RUN isort --check src
 CMD ["tail", "-f", "/dev/null"]
 
 #### test #####################################################################
 # 'test' stage runs our unit tests with pytest and
 # coverage.  Build will fail if test coverage is under 95%
 FROM development AS test
-RUN coverage run --rcfile ./pyproject.toml -m pytest ./tests
-RUN coverage report --fail-under 95
+RUN pytest -nauto src
 
 #### production ###############################################################
 # 'production' stage uses the clean 'python-base' stage and copyies
@@ -93,9 +92,12 @@ COPY ./docker/gunicorn_conf.py /gunicorn_conf.py
 COPY ./entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
-COPY ./app /app
-WORKDIR /app
+COPY ./src /src
+WORKDIR /src
 
 ENTRYPOINT /entrypoint.sh $0 $@
-CMD ["gunicorn", "--worker-class uvicorn.workers.UvicornWorker", \
-  "--config /gunicorn_conf.py", "main:app"]
+CMD [ \
+  "gunicorn", \
+  "--worker-class uvicorn.workers.UvicornWorker", \
+  "--config /gunicorn_conf.py", \
+  "app.main:app" ]
