@@ -70,7 +70,7 @@ CMD ["uvicorn", "--reload", "--host=0.0.0.0", "--port=8000", "main:app"]
 # 'lint' stage runs black and isort
 # running in check mode means build will fail if any linting errors occur
 FROM development AS lint
-RUN black --check --exclude=src/app/db/migrations -q src
+RUN black --check -q src
 RUN isort --check src
 CMD ["tail", "-f", "/dev/null"]
 
