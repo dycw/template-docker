@@ -58,7 +58,6 @@ lines_after_imports = 2
 profile = "black"
 remove_redundant_aliases = true
 skip_glob = ["src/app/db/migrations/*.py"]
-virtual_env = ".venv/bin/python"
 
 #### poetry ###################################################################
 [build-system]
