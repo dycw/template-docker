@@ -8,7 +8,7 @@ exclude: ^src/app/db/migrations/
 repos:
   # fixers
   - repo: https://github.com/asottile/pyupgrade
-    rev: v2.32.0
+    rev: v2.32.1
     hooks:
       - id: pyupgrade
         args: [--py37-plus]
@@ -62,7 +62,7 @@ repos:
       - id: black
   # linters
   - repo: https://github.com/compwa/mirrors-pyright
-    rev: "v1.1.242"
+    rev: "v1.1.244"
     hooks:
       - id: pyright
   - repo: https://github.com/markdownlint/markdownlint

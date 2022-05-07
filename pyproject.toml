@@ -83,7 +83,6 @@ pydantic = { version = "^1.9.0", extras = ["email"] }
 sqlalchemy = "^1.4.36"
 typed-settings = "^1.0.1"
 uvicorn = { version = "^0.17.6", extras = ["standard"] }
-pytest-cov = "^3.0.0"
 
 [tool.poetry.dev-dependencies]
 autoflake = "^1.4"
@@ -104,10 +103,10 @@ flake8-unused-arguments = "^0.0.10"
 isort = "^5.10.1"
 poetry-deps-scanner = "^1.0.1"
 pre-commit = "^2.19.0"
+pyclean = "^2.2.0"
 pytest = "^7.1.2"
 pytest-cov = "^3.0.0"
 pytest-xdist = "^2.5.0"
-requests = "^2.23.0"
 
 #### pyright ##################################################################
 [tool.pyright]
