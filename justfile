@@ -20,5 +20,8 @@ local:
   poetry run uvicorn --host=localhost --port=8000 --reload --app-dir=src \
   app.main:app
 
+run:
+  APP_ENV=dev docker run docker-template
+
 test:
   DOCKER_BUILDKIT=1 docker build -t=docker-template --target=test .
