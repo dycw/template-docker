@@ -1,11 +1,7 @@
 from json import dumps  # noqa: INP001
-from logging import INFO
-from logging import basicConfig
-from logging import info
-from os import cpu_count
-from os import getenv
+from logging import INFO, basicConfig, info
+from os import cpu_count, getenv
 from sys import stdout
-
 
 # From: https://bit.ly/3F2I0hH
 
@@ -19,18 +15,17 @@ host = getenv("HOST", "0.0.0.0")  # noqa: S104
 port = getenv("PORT", "8000")
 bind_env = getenv("BIND", None)
 use_loglevel = getenv("LOG_LEVEL", "info")
-if bind_env:
-    use_bind = bind_env
-else:
-    use_bind = f"{host}:{port}"
+use_bind = bind_env if bind_env else f"{host}:{port}"
 
 if (cores := cpu_count()) is None:
-    raise ValueError(f"{cores=}")
+    msg = f"{cores=}"
+    raise ValueError(msg)
 workers_per_core = float(workers_per_core_str)
 default_web_concurrency = workers_per_core * cores
 if web_concurrency_str:
     if (web_concurrency := int(web_concurrency_str)) <= 0:
-        raise ValueError(f"{web_concurrency=}")
+        msg = f"{web_concurrency=}"
+        raise ValueError(msg)
 else:
     web_concurrency = max(int(default_web_concurrency), 2)
 

@@ -2,16 +2,12 @@ from collections.abc import Iterator
 
 from beartype import beartype
 from sqlalchemy import create_engine
-from sqlalchemy.orm import Session
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import Session, sessionmaker
 
 from app.core.settings import SETTINGS
 
-
 SQLITE_ENGINE = create_engine(SETTINGS.DB_URL)
-SessionLocal = sessionmaker(
-    bind=SQLITE_ENGINE, autoflush=False, autocommit=False
-)
+SessionLocal = sessionmaker(bind=SQLITE_ENGINE, autoflush=False, autocommit=False)
 
 
 @beartype
