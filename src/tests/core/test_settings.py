@@ -1,5 +1,4 @@
-from app.core.settings import SETTINGS
-from app.core.settings import Settings
+from app.core.settings import SETTINGS, Settings
 
 
 def test_settings() -> None:

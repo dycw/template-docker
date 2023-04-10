@@ -1,7 +1,6 @@
-from typing import Literal
+from typing import Any, Literal, cast
 
-from typed_settings import load
-from typed_settings import settings
+from typed_settings import default_loaders, load_settings, settings
 
 
 @settings
@@ -9,7 +8,9 @@ class _EnvSettings:
     ENV: Literal["dev", "test", "prod"]
 
 
-_ENV = load(_EnvSettings, "app", config_files=["pyproject.toml"]).ENV
+_ENV = load_settings(
+    cast(Any, _EnvSettings), default_loaders("app", config_files=["pyproject.toml"])
+).ENV
 
 
 @settings
@@ -21,9 +22,7 @@ class Settings:
     TITLE: str
 
 
-SETTINGS = load(
-    Settings,
-    "app",
-    config_files=["pyproject.toml"],
-    config_file_section=f"app_{_ENV}",
+SETTINGS = load_settings(
+    cast(Any, Settings),
+    default_loaders("app", ["pyproject.toml"], config_file_section=f"app_{_ENV}"),
 )

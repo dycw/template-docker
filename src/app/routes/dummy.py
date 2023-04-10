@@ -4,7 +4,6 @@ from beartype import beartype
 from fastapi import APIRouter
 from pydantic import BaseModel
 
-
 router = APIRouter()
 
 

@@ -1,8 +1,5 @@
-from logging import Handler
-from logging import LogRecord
+from logging import Handler, LogRecord, basicConfig, currentframe
 from logging import __file__ as logging_file
-from logging import basicConfig
-from logging import currentframe
 from pathlib import Path
 from types import FrameType
 from typing import cast
