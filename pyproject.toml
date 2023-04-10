@@ -77,9 +77,12 @@ requires-python = ">= 3.11"
 authors = [{ name = "Derek Wan", email = "d.wan@icloud.com" }]
 dependencies = [
   "alembic[tz] >= 1.10.3, < 1.11",
+  "aerich >= 0.7.1, < 0.8",
+  "asyncpg >= 0.27.0, < 0.28",
   "dycw-utilities[fastapi,loguru,sqlalchemy,typed-settings] >= 0.8.7, < 0.9",
   "gunicorn >= 20.1.0",
   "pydantic[email] >= 1.10.7, < 1.11",
+  "tortoise-orm >= 0.19.3, < 0.20",
   "uvicorn[standard] >= 0.21.1, < 0.22",
 ]
 

@@ -1,0 +1,21 @@
+# https://github.com/docker/docker.github.io/blob/main/.dockerignore
+.DS_Store
+.github
+.gitignore
+.idea
+.jekyll-cache
+.jekyll-metadata
+.sass-cache
+tests
+_releaser
+_site
+CONTRIBUTING.md
+Dockerfile
+docker-compose.yml
+/vendor
+
+# extra
+env
+.dockerignore
+Dockerfile
+Dockerfile.prod

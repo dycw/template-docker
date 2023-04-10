@@ -7,20 +7,20 @@ from starlette.status import HTTP_201_CREATED
 
 from app.db.engines import yield_sess
 from app.db.schemas.users import UserDB
-from app.models import UserInM, UserOutM
+from app.models.users import UserInM, UserOutM
 
 router = APIRouter(prefix="/users")
 
 
 @router.post("/create", response_model=UserOutM, status_code=HTTP_201_CREATED)
 @beartype
-def create(*, user: UserInM, sess: Session = Depends(yield_sess)) -> Any:
-    sess.add(user_db := UserDB(email=user.email, password=user.password))
+async def create(*, user: UserInM, sess: Session = Depends(yield_sess)) -> Any:
+    sess.add(UserDB(email=user.email, password=user.password))
     sess.commit()
-    return user_db
+    return user
 
 
-@router.get("/")
+@router.get("/", response_model=list[UserOutM])
 @beartype
-def root(*, sess: Session = Depends(yield_sess)) -> list[Any]:
+async def root(*, sess: Session = Depends(yield_sess)) -> list[Any]:
     return sess.query(UserDB).all()

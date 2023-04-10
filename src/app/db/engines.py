@@ -4,9 +4,7 @@ from beartype import beartype
 from sqlalchemy import Engine, create_engine
 from sqlalchemy.orm import Session, sessionmaker
 
-from app.core.settings import SETTINGS
-
-SQLITE_ENGINE = create_engine(SETTINGS.DB_URL)
+SQLITE_ENGINE = create_engine("sqlite:///db.sqlite")
 
 
 @beartype
