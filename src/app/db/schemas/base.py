@@ -1,3 +1,5 @@
-from sqlalchemy.orm import declarative_base
+from sqlalchemy.orm import DeclarativeBase, MappedAsDataclass
 
-Base = declarative_base()
+
+class Base(MappedAsDataclass, DeclarativeBase):
+    """Subclasses will be converted to dataclasses."""

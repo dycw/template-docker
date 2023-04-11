@@ -15,9 +15,9 @@ router = APIRouter(prefix="/users")
 @router.post("/create", response_model=UserOutM, status_code=HTTP_201_CREATED)
 @beartype
 def create(*, user: UserInM, sess: Session = Depends(yield_sess)) -> Any:
-    sess.add(user := UserDB(email=user.email, password=user.password))
+    sess.add(user_db := UserDB(email=user.email, password=user.password))
     sess.commit()
-    return user
+    return user_db
 
 
 @router.get("/")
