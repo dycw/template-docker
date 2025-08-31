@@ -1,1 +1,3 @@
-# Docker template
+# `template-docker`
+
+Template for Dockerfiles
