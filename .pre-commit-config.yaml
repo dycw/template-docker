@@ -23,7 +23,7 @@ repos:
     rev: v3.12.0-2
   - hooks:
       - args:
-          - --github--push--tag
+          # - --github--push--tag  # need to do outputs
           - --pre-commit--prettier
           - --pre-commit--shell
           - --pre-commit--taplo
