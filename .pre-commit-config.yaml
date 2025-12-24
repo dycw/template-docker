@@ -5,7 +5,7 @@ repos:
       - args:
           - --description=Template for Dockerfiles
           - --github--pull-request--pre-commit
-          # - --github--push--tag  # need to do outputs
+          - --github--push--tag
           - --pre-commit--dockerfmt
           - --pre-commit--prettier
           - --pre-commit--shell
