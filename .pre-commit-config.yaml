@@ -1,62 +1,67 @@
 repos:
-  - hooks:
+  - repo: https://github.com/dycw/pre-commit-hook-nitpick
+    rev: 0.7.3
+    hooks:
       - args:
-          - --option
-          - indent_tables=true
-          - --option
-          - indent_entries=true
-          - --option
-          - reorder_keys=true
-        id: taplo-format
-    repo: https://github.com/compwa/taplo-pre-commit
-    rev: v0.9.3
-  - hooks:
-      - args:
-          # - --github--push--tag  # need to do outputs
+          - --description=Template for Dockerfiles
+          - --github--pull-request--pre-commit
+          - --github--push--tag
+          - --pre-commit--dockerfmt
           - --pre-commit--prettier
           - --pre-commit--shell
           - --pre-commit--taplo
+          - --readme
+          - --repo-name=template-docker
         id: nitpick
-    repo: https://github.com/dycw/pre-commit-hook-nitpick
-    rev: 0.2.10
-  - hooks:
-      - id: shellcheck
-    repo: https://github.com/koalaman/shellcheck-precommit
-    rev: v0.11.0
-  - hooks:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
       - id: check-executables-have-shebangs
       - id: check-merge-conflict
       - id: check-symlinks
       - id: destroyed-symlinks
       - id: detect-private-key
       - id: end-of-file-fixer
-      - args:
+      - id: mixed-line-ending
+        args:
           - --fix=lf
-        id: mixed-line-ending
       - id: no-commit-to-branch
-      - args:
+      - id: pretty-format-json
+        args:
           - --autofix
-        id: pretty-format-json
       - id: trailing-whitespace
-    repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v6.0.0
-  - hooks:
-      - args:
+  - repo: https://github.com/reteps/dockerfmt
+    rev: v0.3.9
+    hooks:
+      - id: dockerfmt
+        args:
           - --newline
           - --write
-        id: dockerfmt
-    repo: https://github.com/reteps/dockerfmt
-    rev: v0.3.9
-  - hooks:
-      - id: shfmt
-    repo: https://github.com/scop/pre-commit-shfmt
-    rev: v3.12.0-2
-  - hooks:
-      - entry: npx prettier --write
-        id: prettier
-        language: system
+  - repo: local
+    hooks:
+      - id: prettier
         name: prettier
+        entry: npx prettier --write
+        language: system
         types_or:
           - markdown
           - yaml
-    repo: local
+  - repo: https://github.com/scop/pre-commit-shfmt
+    rev: v3.12.0-2
+    hooks:
+      - id: shfmt
+  - repo: https://github.com/koalaman/shellcheck-precommit
+    rev: v0.11.0
+    hooks:
+      - id: shellcheck
+  - repo: https://github.com/compwa/taplo-pre-commit
+    rev: v0.9.3
+    hooks:
+      - id: taplo-format
+        args:
+          - --option
+          - indent_tables=true
+          - --option
+          - indent_entries=true
+          - --option
+          - reorder_keys=true
