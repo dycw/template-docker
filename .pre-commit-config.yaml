@@ -8,6 +8,8 @@ repos:
           - --pre-commit--prettier
           - --pre-commit--shell
           - --pre-commit--taplo
+          - --readme
+          - --repo-name=template-docker
         id: nitpick
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0
