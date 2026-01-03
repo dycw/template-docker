@@ -16,7 +16,7 @@ jobs:
         with:
           token: ${{secrets.GITHUB_TOKEN}}
           repos: |-
-            dycw/pre-commit-hook-nitpick
+            dycw/conformalize
             pre-commit/pre-commit-hooks
   test-publish:
     runs-on: ubuntu-latest
