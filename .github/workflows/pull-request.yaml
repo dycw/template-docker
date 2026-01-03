@@ -14,10 +14,11 @@ jobs:
       - name: Run 'pre-commit'
         uses: dycw/action-pre-commit@latest
         with:
-          token: ${{secrets.GITHUB_TOKEN}}
           repos: |-
             dycw/conformalize
             pre-commit/pre-commit-hooks
+          token-checkout: ${{secrets.GITHUB_TOKEN}}
+          token-uv: ${{secrets.GITHUB_TOKEN}}
   test-publish:
     runs-on: ubuntu-latest
     steps:
