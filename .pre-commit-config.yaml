@@ -1,8 +1,9 @@
 repos:
-  - repo: https://github.com/dycw/conformalize
-    rev: 0.12.0
+  - repo: https://github.com/dycw/actions
+    rev: 0.6.3
     hooks:
-      - args:
+      - id: conformalize-repo
+        args:
           - --description=Template for Dockerfiles
           - --github--pull-request--pre-commit
           - --github--push--tag
@@ -12,7 +13,6 @@ repos:
           - --pre-commit--taplo
           - --readme
           - --repo-name=template-docker
-        id: conformalize
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0
     hooks:
