@@ -4,21 +4,19 @@ on:
     branches:
       - master
   schedule:
-    - cron: 0 0 * * *
+    - cron: 34 9 * * *
 env:
   test_tag: ghcr.io/${{github.repository}}:test
 jobs:
   pre-commit:
     runs-on: ubuntu-latest
     steps:
-      - name: Run 'pre-commit'
-        uses: dycw/action-pre-commit@latest
+      - if: github.event_name == 'pull_request'
+        name: Run 'pre-commit' hooks
+        uses: dycw/action-run-hooks@latest
         with:
           repos: |-
-            dycw/conformalize
             pre-commit/pre-commit-hooks
-          token-checkout: ${{secrets.GITHUB_TOKEN}}
-          token-uv: ${{secrets.GITHUB_TOKEN}}
   test-publish:
     runs-on: ubuntu-latest
     steps:
