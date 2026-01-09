@@ -5,6 +5,7 @@ on:
       - master
   schedule:
     - cron: 0 0 * * *
+    - cron: 34 9 * * *
 env:
   test_tag: ghcr.io/${{github.repository}}:test
 jobs:
@@ -20,6 +21,12 @@ jobs:
             dycw/actions
             pre-commit/pre-commit-hooks
           sleep: 1
+      - if: github.event_name == 'pull_request'
+        name: Run 'pre-commit' hooks
+        uses: dycw/action-run-hooks@latest
+        with:
+          repos: |-
+            pre-commit/pre-commit-hooks
 test-publish:
   runs-on: ubuntu-latest
   steps:
